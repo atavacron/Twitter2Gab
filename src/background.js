@@ -17,7 +17,7 @@ const VERSION = browser.runtime.getManifest().version;
 var gPostTweetReplies = false;
 var gIncludeTweetUrl = true;
 var gPostMobile = false;
-var gRedirectToGab = true;
+var gRedirectToGab = false;
 var gShareRtOnGab = false;
 var gConfirmationPopup = true;
 
@@ -68,7 +68,14 @@ function initSettingsStorage()
 
 function readSettingsStorage()
 {
-  var gettingItem = browser.storage.local.get(['postreplies','includetweeturl','sharert','opentab']);
+  var gettingItem = browser.storage.local.get([
+    'postreplies',
+    'includetweeturl',
+    'sharert',
+    'postmobile',
+    'confirmationpopup',
+    'opentab'
+  ]);
   gettingItem.then((res) => {
     gPostTweetReplies = res.postreplies || false;
     gIncludeTweetUrl = res.includetweeturl || true;
