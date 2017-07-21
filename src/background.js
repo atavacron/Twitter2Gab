@@ -99,6 +99,14 @@ var gLastRedirectTabOpened = 0;
 
 function gabResponseReceived(x)
 {
+
+  if (x.status != 200)
+  {
+    popupOnActiveTab("ERROR", "Status: " + x.status + "\nCheck console (CTRL+SHIFT+J) for more infos", 15, null);
+    console.error(x.responseText);
+    return;
+  }
+
   var result = x.responseText;
   var regex = /gab\.ai\/auth\/login/;
   var match = regex.exec(result);
@@ -111,14 +119,27 @@ function gabResponseReceived(x)
 // ############ fix me ################### 
     gLoggedIn2Gab = false;
   } else {
-    let response_json = JSON.parse(x.responseText);
+
+    let response_json = null;
+    try {
+      response_json = JSON.parse(x.responseText);
+    }
+    catch(err)
+    {
+      popupOnActiveTab("ERROR", "Unknown error. Check console (CTRL+SHIFT+J) for more infos", 15, null);
+      console.error(x.responseText);
+    }
+
+    if (response_json == null) return;
+
     if (response_json.state != null)
     {
       if (response_json.state == "error")
       {
-        debugLog("gab.ai error:\n " + response_json.message + "\n" + response_json.body);
-        popupOnActiveTab("ERROR", response_json.body, 15, null);
-      } else debugLog("gab.ai unknown state: " + x.responseText);
+        popupOnActiveTab("ERROR", "Unknown error. Check console (CTRL+SHIFT+J) for more infos", 15, null);
+        console.error(response_json.body);
+        console.error(response_json.message);
+      } else console.error("gab.ai unknown state: " + x.responseText);
     }
     if (response_json.published_at != null) {
         let gab_url = "https://gab.ai/" + response_json.actuser.username + "/posts/" + response_json.post.id;
@@ -209,8 +230,12 @@ function sendTweetToGab()
 {
   if (!gPostMobile && gWebuiTweetData == null) return;
   let gabtxt = createGabText();
-  if (gabtxt != null) {
-    postGab(gabtxt);
+  if (gabtxt != null) 
+  {
+    if (gabtxt.trim() == "") {
+      popupOnActiveTab("WARNING", 
+        "Empty text field not sent to gab.ai. Posting images is not supported yet.", 10, null);
+    } else postGab(gabtxt);
   }
   gTweetData = null;
   gWebuiTweetData = null;
@@ -220,7 +245,6 @@ function haveUiDataSendGab()
 {
   if (gTweetData == null) return;
   sendTweetToGab();
-  //getActiveTab();
 }
 
 /* ################################################################################################## */
@@ -282,7 +306,7 @@ function interceptTweet(requestDetails)
   {
     var replyto_id = requestDetails.requestBody.formData.in_reply_to_status_id;
     gTweetData = new Array();
-    gTweetData[0] = requestDetails.requestBody.formData.status;
+    gTweetData[0] = requestDetails.requestBody.formData.status[0];
     gTweetData[1] = requestDetails.requestBody.formData.in_reply_to_status_id;
     gTweetReqId = requestDetails.requestId;
     browser.webRequest.onResponseStarted.addListener(
@@ -291,7 +315,6 @@ function interceptTweet(requestDetails)
     );
   } 
 }
-
 
 function logTweetResponse(responseDetails) 
 {
