@@ -1,7 +1,13 @@
 # Twitter2Gab by [gab.ai/miraculix](https://gab.ai/miraculix)
 ## Webextension for Firefox
 
-Screenshot [link](https://raw.githubusercontent.com/Miraculix200/Twitter2Gab/master/ScreenShot1.jpg)
+## Screenshots
+
+Tweet [link](https://raw.githubusercontent.com/Miraculix200/Twitter2Gab/master/screenshots/compose.PNG)
+
+Retweet [link](https://raw.githubusercontent.com/Miraculix200/Twitter2Gab/master/screenshots/retweet.PNG)
+
+Settings [link](https://raw.githubusercontent.com/Miraculix200/Twitter2Gab/master/screenshots/settings.PNG)
 
 ## Features:
 
