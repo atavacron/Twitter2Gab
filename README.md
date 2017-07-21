@@ -11,35 +11,10 @@ Settings [link](https://raw.githubusercontent.com/Miraculix200/Twitter2Gab/maste
 
 ## Features:
 
-n/a
+With this addon you can automatically share Tweets and Retweets from Twitter on gab.ai.
 
-### WARNING 
-
-n/a
+Image posting is not supported yet, but there is an option to automatically add a link to your tweet.
 
 ## Installation:
 
-### From source
-
-1. Download Twitter2Gab from Github
-2. open about:debugging in Firefox
-3. Click "Load Temporary Add-on" and select any of the files in the src/ folder
-
-When you restart Firefox you have to repeat steps 2. and 3. If you don't want to repeat these steps, install from .xpi
-
-### From .xpi
-
-1. Download Twitter2Gab-1.2-an+fx.xpi from the folder above
-2. On Windows doubleclick the file, maybe you need to chose to load it with Firefox
-3. Click "Install" in the popup in Firefox
-
-Installing it from the addon menu may not work (error message about signing or so), use the doubleclick method or open it from the File menu in Firefox
-
-## Usage:
-
-n/a
-
-## Updating:
-
-n/a
-
+https://addons.mozilla.org/en-US/firefox/addon/twitter2gab/
