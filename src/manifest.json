@@ -1,0 +1,61 @@
+{
+  "manifest_version": 2,
+  "name": "Twitter2Gab",
+  "version": "1.0",
+  "description": "Automatically share tweets on gab.ai",
+  "homepage_url": "https://addons.mozilla.org/en-US/firefox/user/miraculix200/",
+  "icons": {
+    "48": "icons/t2gfrog64.png"
+  },  
+  "applications": {
+    "gecko": {
+      "id": "Twitter2Gab@example.org"
+    }
+  },
+
+  "permissions": [
+    "alarms",
+    "storage",
+    "webRequest",
+    "activeTab",
+    "*://gab.ai/feed/*",
+    "*://gab.ai/posts",
+    "*://twitter.com/i/notifications",
+    "*://twitter.com/*/with_replies",
+    "*://twitter.com/i/tweet/create"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "page_action": {
+    "browser_style": true,
+    "default_icon": "icons/t2gfrog64.png",
+    "default_title": "Twitter2Gab"
+  },
+
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
+
+  "web_accessible_resources": [
+    "popup.html"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+              "*://twitter.com/*"
+//              "*://twitter.com/i/notifications", 
+//              "*://twitter.com/*/status/*",
+//              "*://twitter.com/*/lists/*",
+//              "*://twitter.com/hashtag/*" 
+      ],
+      "js": ["twitter2gab.js", "popup.js"],
+      "css": ["twitter2gab.css"]
+    }
+  ]
+
+}

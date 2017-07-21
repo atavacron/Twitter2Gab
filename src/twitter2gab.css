@@ -1,0 +1,54 @@
+
+.t2g-cb-label
+{
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.Share2Gab-item {
+	width: auto;
+	max-width: 200px;
+	display: inline-block;
+}
+
+.TweetBoxExtras-item.GabExtra, .Share2Gab-item
+{
+	background: rgb(237, 238, 238);
+	font-family: 'proxima-nova', 'helveticaneue-light', 'helvetica', sans-serif; 
+	border: 2px solid rgb(52, 207, 127); 
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.t2g-pop-fill {
+	z-index: 1337;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	width: 100% !important;
+	height: 100% !important;
+	visibility: hidden;
+}
+
+.t2g-pop-iframe {
+	height:100%;
+	width:100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+}
+
+.t2g-pop-div-ifr
+{
+	height:210px !important;
+	width:590px !important;
+	display: block !important;
+	position: relative;
+	padding: 0px !important;
+	margin: 200px auto 0 auto;
+	z-index:1999;
+
+}
+

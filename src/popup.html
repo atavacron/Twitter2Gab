@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Twitter2Gab</title>
+<style>
+
+.t2g_popup_container {
+
+	position: fixed; 
+	left: 0px; 
+	top: 0px; 
+	font-family: 'proxima-nova', 'helveticaneue-light', 'helvetica', sans-serif; 
+	height: 99%; 
+	visibility: visible;
+	width: 99%;
+}
+
+.t2g_popup {
+	z-index: 2006; 
+	background: rgb(137, 138, 138);
+	font-size: 14px; 
+	color: white;
+	width: 400px;
+	height: 200px; 
+    border-radius: 15px; 
+    margin: 0 auto;
+    box-shadow: -1px 3px 5px 1px #888;
+    border: 2px solid rgb(52, 207, 127); 
+}
+
+.t2g_popup_header {
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	 text-shadow: -2px 2px #333333;
+	height: 26px;
+	padding: 3px;
+	font-size: 20px;
+	font-weight: bold;
+	z-index: 2007; 
+}
+
+.t2g_popup_body {
+	color: black;
+	padding: 15px;
+	background: rgb(237, 238, 238);
+	height: 120px;
+	font-size: 30px;
+	text-align: center;
+	z-index: 2007; 
+}
+
+.t2g_popup_body_link {
+	color: red;
+	text-align: center;
+	bottom: 25;
+	position: absolute;
+	left: 95;
+	height: 45px;
+	width: 400px;
+	font-size: 20px;
+	cursor: pointer;
+	visibility: hidden;
+	z-index: 2007; 
+}
+
+
+.t2g_popup_footer
+{
+	bottom: 0;
+	text-align: center;
+	padding-right: 20px;
+	z-index: 2008; 
+ 	text-shadow: -2px 2px #333333;
+	cursor: crosshair;
+}
+
+.t2g_popup_footer:hover
+{
+	font-color: rgb(52, 207, 127);
+	background: black;
+}
+
+</style>
+</head>
+<body>
+<div class="t2g_popup_container">
+	<div class="t2g_popup">
+		<div id="t2g_popup_header" class="t2g_popup_header">
+			test
+		</div>
+		<div class="t2g_popup_body">
+			<div id="t2g_popup_body">
+				test
+			</div>
+			<div id="t2g_popup_link" class="t2g_popup_body_link">	
+				test
+			</div>
+		</div>
+		<div class="t2g_popup_footer" id="t2g_popup_footer">
+			test
+		</div>
+	</div>
+</div>
+</body>
+</html>

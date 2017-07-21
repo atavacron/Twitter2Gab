@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      label { 
+        color: rgb(52, 207, 127); 
+        font-weight:bold; 
+        font-size:22px;
+      }
+
+      a:link {
+        color: rgb(52, 207, 127);
+      }
+
+      a:visited {
+          color: rgb(52, 207, 127);
+      }
+
+      .options_box_container
+      {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        width: 600px;
+        display: block;
+        margin: auto;
+      }
+      .options_box
+      {
+        border-radius: 15px; 
+        border: 2px solid rgb(52, 207, 127); 
+        background: rgb(237, 238, 238) none repeat scroll 0% 0%; 
+        font-family: 'proxima-nova', 'helveticaneue-light', 'helvetica', sans-serif; 
+        font-size: 12px; 
+        padding: 5px;
+      }
+
+      .options_box_title
+      {
+        font-size: 19px; 
+        font-family: 'proxima-nova', 'helveticaneue-light', 'helvetica', sans-serif; 
+        font-weight:bold; 
+      }
+
+      .description
+      {
+        font-size: 14px;
+        padding-left: 5px;
+        color: black
+      }
+
+      input, label
+      {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+  <form id="muh_form">
+    <div class="options_box_container">
+      <div class="options_box_title">
+        <center>
+          Tweetbox Defaults
+        </center>
+      </div>
+      <div class="options_box">
+        <table>
+          <tr>
+            <td>
+               <input type="checkbox" id="include_tweet_url">
+            </td>
+            <td>
+              <label for="include_tweet_url">
+                Add link to tweet
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="description">
+                Includes a link to the tweet when sharing the tweet on gab.ai
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="post_replies">
+            </td>
+            <td>
+              <label for="post_replies">
+                Share replies
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="description">
+                Share replies to other tweeps to gab.ai. By default replies in Twitter threads don't get shared on gab.ai
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="share_retweets">
+            </td>
+            <td>
+              <label for="share_retweets">
+                Share retweets
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="description">
+              Shares tweets you retweet to gab.ai, including the @name of the tweep you retweet
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="options_box_container">
+      <div class="options_box_title">
+        <center>
+          Other Settings
+        </center>
+      </div>
+      <div class="options_box">
+        <table>
+          <tr>
+            <td>
+              <input type="checkbox" id="open_tab">
+            </td>
+            <td>
+              <label for="open_tab">
+                Open gab.ai after posting
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="description">
+               Opens a new tab with the posting on gab.ai, so you can review it, edit it, etc.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="confirmation_popup">
+            </td>
+            <td>
+              <label for="open_tab">
+                Confirm tweet shared on gab.ai
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="description">
+                Opens a popup with a link to the posting on gab.ai after sharing a tweet
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="post_mobile">
+            </td>
+            <td>
+              <label for="open_tab">
+                Share tweets without webUI data
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="description">
+              Turn this on if tweets don't automatically get shared on gab.ai. Shouldn't be necessary unless Twitter
+              does some unexpected UI changes.
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </form>
+  <div class="options_box_container" style="padding: 30px; width: 75%">
+    <center>
+      <a target="_blank" href="https://addons.mozilla.org/en-US/firefox/user/miraculix200/">
+        <img style="display: block; margin: auto; padding-top: 0px;" src="icons/t2gfrog.png">
+      </a>
+      <div style="padding: 30px;">
+        <a href="https://github.com/Miraculix200/Twitter2Gab" target="_blank">Get the source code</a> for this webextension
+      </div>
+    </center>
+  </div>
+  <script src="options.js"></script>
+  </body>
+</html>
