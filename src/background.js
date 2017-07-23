@@ -273,7 +273,9 @@ function getLastTweetUrl(screenname)
   xhr.open("GET", "https://twitter.com/" + screenname + "/with_replies", false);
   xhr.send();
   var doc = document.implementation.createHTMLDocument("hax");
-  doc.documentElement.innerHTML = xhr.responseText;
+  // very unlikely (impossible?) possibility to produce malicious URL here, which would have to be clicked on
+  // problem neutralized a few lines below
+  doc.documentElement.innerHTML = xhr.responseText; 
   let stream_items = doc.getElementById("stream-items-id");
 
   if (stream_items != null)
@@ -284,11 +286,17 @@ function getLastTweetUrl(screenname)
       for (let i=0; i<my_tweets.length; i++)
       {
         let permalink = my_tweets[i].getAttribute("data-permalink-path");
-        if (permalink != null) return "https://twitter.com" + permalink;
+        if (permalink != null)
+        {
+          // added regex because of unsafe assignment of innerHTML above 
+          // to make it impossible for this function to return malicious URL
+          let regex = /\/[a-zA-Z0-9_]*\/status\/\d*/;
+          let match = regex.exec(permalink);
+          if (match != null) return "https://twitter.com" + match[0];
+        }
       }
     }
   }
-
   console.error("couldn't find any tweets to produce URL: getLastTweetUrl(" + screenname + ") - different contextual identity?");
   gTwitterScreenname = getTwitterScreenname();
   popupOnActiveTab("WARNING","Couldn't find URL of Tweet. Posting to gab.ai anyway", 15, null);

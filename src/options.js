@@ -1,8 +1,3 @@
-function saveOptionsDelayed(e)
-{
-  window.setTimeout(function() { saveOptions(e); }, 500);
-}
-
 function saveOptions(e) 
 {
   browser.storage.local.set({
@@ -35,4 +30,4 @@ async function restoreOptions()
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
-document.getElementById("muh_form").addEventListener("click", saveOptionsDelayed);
+document.getElementById("muh_form").addEventListener("click", saveOptions);
