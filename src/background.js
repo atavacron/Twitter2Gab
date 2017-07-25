@@ -362,9 +362,12 @@ function handleUpdatedTab(tabId, changeInfo, tabInfo)
 {
   if (changeInfo.status == "complete") 
   {
-    browser.pageAction.show(tabId);
-    gCurrentTabId = tabId;
-  }
+    if (tabInfo.url.indexOf("twitter.com") != -1)
+    {
+      browser.pageAction.show(tabId);
+      gCurrentTabId = tabId;
+    } else browser.pageAction.hide(tabId);
+  } 
 }
 
 function popupOnActiveTab(header, text, seconds_delay, url)
