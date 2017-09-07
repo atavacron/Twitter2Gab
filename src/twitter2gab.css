@@ -21,6 +21,11 @@
 	padding-right: 10px;
 }
 
+.TweetBoxExtras-item.GabExtra.night, .Share2Gab-item.night
+{
+	background: #141d26;
+}
+
 .t2g-pop-fill {
 	z-index: 1337;
 	position: fixed;

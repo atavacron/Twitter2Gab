@@ -18,25 +18,21 @@ var gOptionPostreplies = false;
 var gOptionIncludeUrl = true;
 var gOptionShareRt = false;
 var gLoggedIntoGab = true;
+var gNightModeActive = false;
 
 /* ################################################################################################## */
 /* ################################################################################################## */
 /* ################################################################################################## */
 
-function debugLog(txt)
-{
-  if (DEBUG) console.log(getTimestamp() + ": " + txt);
-}
+var debugLog = DEBUG ? console.log : () => { return null; };
 
-function getTimestamp()
-{
+const getTimestamp = () => {
   return Math.floor(Date.now() / 1000);
 }
 
 /* ################################################################################################## */
 
-async function getOptionsStorage()
-{
+const getOptionsStorage = async () => {
   	let settings = await browser.storage.local.get(['postreplies', 'includetweeturl', 'sharert']);
   	if (settings == null) return false;
   	if (settings.postreplies != null) gOptionPostreplies = settings.postreplies;
@@ -47,10 +43,10 @@ async function getOptionsStorage()
 
 /* ################################################################################################## */
 
-function createShareToGabItem(id)
-{
+const createShareToGabItem = (id) => {
+	let s2g_item_class = gNightModeActive ?  "Share2Gab-item night" : "Share2Gab-item";
 	let extras_item = document.createElement('div');
-	extras_item.setAttribute("class", "Share2Gab-item");
+	extras_item.setAttribute("class", s2g_item_class);
 	extras_item.setAttribute("t2g", "haxxed");
 
 	let cb_label = document.createElement('label');
@@ -84,10 +80,10 @@ function createShareToGabItem(id)
 	return extras_item;
 }
 
-function createExtrasItem(id)
-{
+const createExtrasItem = (id) => {
+	let gabextra_class = gNightModeActive ? "TweetBoxExtras-item GabExtra night" : "TweetBoxExtras-item GabExtra";
 	let extras_item = document.createElement('span');
-	extras_item.setAttribute("class", "TweetBoxExtras-item GabExtra");
+	extras_item.setAttribute("class", gabextra_class);
 	extras_item.setAttribute("t2g", "haxxed");
 
 	let cb_label = document.createElement('label');
@@ -144,8 +140,7 @@ function createExtrasItem(id)
 
 /* ################################################################################################## */
 
-function getTwitterUiScreenname()
-{
+const getTwitterUiScreenname = () => {
 	let dropdown = document.getElementById("user-dropdown");
 	if (dropdown == null) return;
 	let uname_udir = dropdown.getElementsByClassName("username u-dir")[0];
@@ -158,8 +153,7 @@ function getTwitterUiScreenname()
 
 /* ################################################################################################## */
 
-function addCommentBoxMutationObserver(dialog_footer, comment_box, dialog_id)
-{
+const addCommentBoxMutationObserver = (dialog_footer, comment_box, dialog_id) => {
 	if (dialog_footer.getAttribute("t2g-observed") == null)
 	{
 		dialog_footer.setAttribute("t2g-observed", "hax");
@@ -176,8 +170,7 @@ function addCommentBoxMutationObserver(dialog_footer, comment_box, dialog_id)
 
 var gDoneSetShareRtDefault = false;
 
-function setShareRtCheckbox(dialog_footer)
-{
+const setShareRtCheckbox = (dialog_footer) => {
 	let s2g_cb = dialog_footer.getElementsByClassName("share2gab")[0];
 	if (s2g_cb != null && gDoneSetShareRtDefault == false) 
 	{
@@ -187,8 +180,7 @@ function setShareRtCheckbox(dialog_footer)
 	}
 }
 
-function addT2gExtra(dialog_id, is_retweet)
-{
+const addT2gExtra = (dialog_id, is_retweet) => {
 	var add_extras_element = null;
 	var is_reply = false;
 	var t2g_cb_replies = null;
@@ -268,8 +260,7 @@ function addT2gExtra(dialog_id, is_retweet)
 	}
 }
 
-function modifyPermalinkOverlay(overlay_id)
-{
+const modifyPermalinkOverlay = (overlay_id) => {
 	gMutationTimeoutId = null;
 	// overlay_id probably doesn't exist anymore, so get new element
 	var pod = document.getElementById("permalink-overlay");
@@ -281,8 +272,7 @@ function modifyPermalinkOverlay(overlay_id)
 }
 
 // detect changes to tweet dialogs and modify them
-function monitorTweetDialogs()
-{
+const monitorTweetDialogs = () => {
 	var rtd = document.getElementById("retweet-tweet-dialog");
 	var gtd = document.getElementById("global-tweet-dialog");
 	var pod = document.getElementById("permalink-overlay");
@@ -327,38 +317,33 @@ function monitorTweetDialogs()
 
 /* ################################################################################################## */
 
-function modifyRetweetDialog(dialog_id)
-{
+const modifyRetweetDialog = (dialog_id) => {
 	gMutationTimeoutId = null;
 	addT2gExtra(dialog_id, true);
 	addButtListener(dialog_id);
 }
 
-function modifyTweetDialog(dialog_id)
-{
+const modifyTweetDialog = (dialog_id) => {
 	gMutationTimeoutId = null;
 	addT2gExtra(dialog_id, false);
 	addButtListener(dialog_id);
 }
 
-function modifyInlineReplyBox(dialog_id)
-{
+const modifyInlineReplyBox = (dialog_id) => {
 	addT2gExtra(dialog_id, false);
 	addButtListener(dialog_id);
 }
 
 /* ################################################################################################## */
 
-function addButtListener(dialog_id)
-{
+const addButtListener = (dialog_id) => {
 	var butt = dialog_id.getElementsByClassName("tweet-button")[0];
 	if (butt.getAttribute("t2g_butt") != null) return;
 	butt.setAttribute("t2g_butt", "haxxed");
 	butt.addEventListener("click", function() { handleTweetbuttClick(butt) });
 }
 
-function handleTweetbuttClick(ele)
-{
+const handleTweetbuttClick = (ele) => {
 	gDoneSetShareRtDefault = false;
 	let modal_title = ele.parentNode.parentNode.parentNode.getElementsByClassName("modal-title")[0];
 
@@ -426,8 +411,7 @@ function handleTweetbuttClick(ele)
 /* ################################################################################################## */
 
 // unused
-function handleResponse(message) 
-{
+const handleResponse = (message) => {
 	if (message.gabloggedin != null)
 	{
 		// fix me
@@ -436,7 +420,7 @@ function handleResponse(message)
 	}
 }
 
-function isGabLoggedIn() {
+const isGabLoggedIn = () => {
   let sending = browser.runtime.sendMessage({
   	gabloggedin: "praise kek",
   	screenname: gTwitterUiScreenname
@@ -444,14 +428,18 @@ function isGabLoggedIn() {
   sending.then(handleResponse, null);  
 }
 
+const checkNightMode = () => {
+	if (document.head.innerHTML.indexOf("nightmode_twitter_core") != -1) gNightModeActive = true;
+}
+
 /* ################################################################################################## */
 /* ################################################################################################## */
 /* ################################################################################################## */
 
-async function init()
-{
+const init = async () => {
 	await getOptionsStorage();
 	isGabLoggedIn();
+	checkNightMode();
 	getTwitterUiScreenname();
 	monitorTweetDialogs();
 }
